@@ -8,65 +8,77 @@
     <link rel="stylesheet" href="./custom.css" />
   </head>
   <body>
-    <!-- <h2 class="text-center text-3xl font-bold py-4 bg-[#2dc9f1]"> -->
     <h2 class="text-center text-3xl font-bold py-4 text-[#222256] bg-[#fcc94a]">
       Weather Dashboard
     </h2>
-    <!-- <main
-      class="maincontainer py-8 flex gap-8 px-8 bg-gradient-to-r from-[#69d0f9] to-[#48cafe]"
-    > -->
+
     <main
-      class="maincontainer py-8 flex flex-col md:flex-row gap-8 px-8 text-white"
+      class="maincontainer py-8 flex flex-col lg:flex-row gap-8 px-8 text-white"
     >
-      <section class="inputCity md:w-[30%]">
+      <section class="inputCity lg:w-[30%] xl-w-[30%]">
         <h3 class="font-bold text-xl">Enter a City Name</h3>
         <input
           type="text"
           placeholder="E.g. New York, London, Tokyo"
           class="px-4 py-2 my-2 block w-full text-black"
         />
-        <button
-          class="btn w-full bg-[#fcc94a] text-[#222256] font-bold px-4 py-2"
+        <button id="search"
+          class="btn w-full mt-2 bg-[#fcc94a] text-[#222256] font-bold px-4 py-2"
         >
           Search
         </button>
-        <h4>or</h4>
+        <h4 class="my-2 text-center text-xl">or</h4>
         <button class="btn w-full bg-red-500 px-4 py-2">
           Use Current Location
         </button>
+
+        <div class="prevLocations">
+          <h2 class="my-2">Previous Locations</h2>
+          <select
+            name="locations"
+            id="locations"
+            class="text-black p-2 outline-none"
+          >
+            <option value="jalgaon">Jalgaon</option>
+            <option value="delhi">Delhi</option>
+          </select>
+        </div>
       </section>
 
-      <section class="infoCity w-full">
-        <!-- <div
-          class="currentCity bg-green-400 w-full flex justify-between p-4 my-4"
-        > -->
+      <section class="infoCity lg:w-[60%] xl:w-full">
         <div
-          class="currentCity backdrop-blur-sm bg-[#ffffff5c] border border-white w-full flex-col-reverse md:flex-row flex justify-between p-4 my-4"
+          class="currentCity backdrop-blur-sm bg-[#ffffff5c] border border-white w-full flex-col-reverse sm:flex-row flex justify-between p-4 my-4"
         >
           <div class="data text-xl">
-            <h3 class="text-2xl font-bold">London (2024-04-23)</h3>
-            <p>Temperature: 7.06 o C</p>
-            <p>Wind: 2.85 M/S</p>
-            <p>Humidity: 88%</p>
+            <h3 class="text-2xl font-bold">
+              <span id="mainCity">London </span>
+              (<span id="date">2024-04-23</span>)
+            </h3>
+            <p>Temperature: <span id="mainTemp">7.06 o C</span></p>
+            <p>Wind: <span id="mainWind">2.85 M/S</span></p>
+            <p>Humidity: <span id="mainHumidity"> 88</span>%</p>
           </div>
           <div class="icon">
             <img
+              id="mainImg"
               src="https://cdn-icons-png.flaticon.com/512/252/252035.png"
               width="100px"
               alt=""
             />
-            <p>Light Rain</p>
+            <p id="mainFeels">Light Rain</p>
           </div>
         </div>
 
         <div class="futureForecast">
           <h2 class="text-2xl py-4 font-bold">5-Day Forecast</h2>
           <div
-            class="cards justify-between py-6 flex flex-wrap md:flex-nowrap flex-col md:flex-row gap-4"
+            class="cards justify-start xl:justify-between py-6 flex flex-wrap xl:flex-nowrap lg:flex-row gap-4"
           >
+
+
             <div
-              style="box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1)"
-              class="card w-[12rem] p-4 backdrop-blur-sm bg-[#ff00005c] border border-white"
+             
+              class="card w-full xs:w-[13rem] p-4 backdrop-blur-sm bg-[#ffffff5c] transition-all hover:bg-[#ff00005c] border border-white"
             >
               <h3>2024-04-24</h3>
               <img
@@ -81,7 +93,7 @@
 
             <div
               style="box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1)"
-              class="card w-full sm:w-[13rem] p-4 backdrop-blur-sm bg-[#ffffff5c] border border-white"
+              class="card w-full xs:w-[13rem] p-4 backdrop-blur-sm bg-[#ffffff5c] transition-all hover:bg-[#ff00005c] border border-white"
             >
               <h3>2024-04-24</h3>
               <img
@@ -96,7 +108,7 @@
 
             <div
               style="box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1)"
-              class="card w-full sm:w-[13rem] p-4 backdrop-blur-sm bg-[#ffffff5c] border border-white"
+              class="card w-full xs:w-[13rem] p-4 backdrop-blur-sm bg-[#ffffff5c] transition-all hover:bg-[#ff00005c] border border-white"
             >
               <h3>2024-04-24</h3>
               <img
@@ -111,7 +123,7 @@
 
             <div
               style="box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1)"
-              class="card w-full sm:w-[13rem] p-4 backdrop-blur-sm bg-[#ffffff5c] border border-white"
+              class="card w-full xs:w-[13rem] p-4 backdrop-blur-sm bg-[#ffffff5c] transition-all hover:bg-[#ff00005c] border border-white"
             >
               <h3>2024-04-24</h3>
               <img
@@ -126,7 +138,7 @@
 
             <div
               style="box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1)"
-              class="card  w-full sm:w-[13rem]  p-4 backdrop-blur-sm bg-[#ffffff5c] border border-white"
+              class="card w-full xs:w-[13rem] p-4 backdrop-blur-sm bg-[#ffffff5c] transition-all hover:bg-[#ff00005c] border border-white"
             >
               <h3>2024-04-24</h3>
               <img
@@ -142,5 +154,6 @@
         </div>
       </section>
     </main>
+    <script src="./index.js"></script>
   </body>
 </html>
