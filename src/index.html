@@ -7,7 +7,15 @@
     <link rel="stylesheet" href="./output.css" />
     <link rel="stylesheet" href="./custom.css" />
   </head>
-  <body>
+  <body class="relative">
+    <div
+      class="loader hidden absolute top-0 left-0 h-[110vh] z-10 text-white text-xl flex items-center justify-center w-full bg-[#222256]"
+    >
+      <div class="loader-content flex justify-center items-center flex-col">
+        <img src="./img/animation.gif" alt="" />
+        <p>Loading ...</p>
+      </div>
+    </div>
     <h2 class="text-center text-3xl font-bold py-4 text-[#222256] bg-[#fcc94a]">
       Weather Dashboard
     </h2>
@@ -19,16 +27,18 @@
         <h3 class="font-bold text-xl">Enter a City Name</h3>
         <input
           type="text"
+          value="london"
           placeholder="E.g. New York, London, Tokyo"
           class="px-4 py-2 my-2 block w-full text-black"
         />
-        <button id="search"
+        <button
+          id="search"
           class="btn w-full mt-2 bg-[#fcc94a] text-[#222256] font-bold px-4 py-2"
         >
           Search
         </button>
         <h4 class="my-2 text-center text-xl">or</h4>
-        <button class="btn w-full bg-red-500 px-4 py-2">
+        <button id="currentLocationBtn" class="btn w-full bg-red-500 px-4 py-2">
           Use Current Location
         </button>
 
@@ -74,10 +84,7 @@
           <div
             class="cards justify-start xl:justify-between py-6 flex flex-wrap xl:flex-nowrap lg:flex-row gap-4"
           >
-
-
             <div
-             
               class="card w-full xs:w-[13rem] p-4 backdrop-blur-sm bg-[#ffffff5c] transition-all hover:bg-[#ff00005c] border border-white"
             >
               <h3>2024-04-24</h3>
