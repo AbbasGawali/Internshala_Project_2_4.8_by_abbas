@@ -1,4 +1,4 @@
-
+// getting all the dom elements and storing them in variables
 const mainCity = document.getElementById("mainCity");
 const mainTemp = document.getElementById("mainTemp");
 const mainWind = document.getElementById("mainWind");
@@ -8,18 +8,20 @@ const mainFeels = document.getElementById("mainFeels");
 const mainDate = document.getElementById("date");
 const cards = document.querySelector(".cards");
 const locations = document.getElementById("locations");
+const inputCity = document.querySelector("input");
+const searchBtn = document.querySelector("#search")
+const currentLocationBtn = document.querySelector("#currentLocationBtn")
 const PreviousCities = new Set();
 const PreviousStoredCities = JSON.parse(localStorage.getItem("PreviousCities")) || [];
 const date = new Date();
 mainDate.textContent = date.toLocaleDateString();
-const inputCity = document.querySelector("input");
-const searchBtn = document.querySelector("#search")
-const currentLocationBtn = document.querySelector("#currentLocationBtn")
+
+// latitude and longitude undefined, to access in whole document
 let userLatitude = undefined;
 let userLongitude = undefined;
 
 
-
+// added event listener with search functionality
 searchBtn.addEventListener("click", () => {
     if (!inputCity.value) {
         alert("Please enter City Name");
@@ -29,12 +31,13 @@ searchBtn.addEventListener("click", () => {
     }
 })
 
-
+// get current location when click on button below
 currentLocationBtn.addEventListener("click", () => {
     getCurrentUserLocation();
 })
 
 
+// search for city that are stored in the localhost i.e. history, and it also has unique values only for reducing confusion 
 locations.addEventListener("change", (e) => {
     let item = e.target.value
     fetchForecast(false, false, item);
@@ -43,24 +46,26 @@ locations.addEventListener("change", (e) => {
 
 
 
-
+// if cities are present in localstorage, adding them in the set
 if (PreviousStoredCities) {
     PreviousStoredCities.forEach(item => {
         PreviousCities.add(item)
     });
 }
 
+// function to show loader
 const showLoader = () => {
     document.querySelector(".loader").style.display = "flex"
     document.querySelector(".maincontainer").style.display = "none"
-
 }
+
+// function to hide loader
 const hideLoader = () => {
     document.querySelector(".maincontainer").style.display = "flex"
     document.querySelector(".loader").style.display = "none"
 }
 
-
+// get current location of user, location permission is required
 const getCurrentUserLocation = () => {
     function getLocation() {
         if (navigator.geolocation) {
@@ -76,7 +81,9 @@ const getCurrentUserLocation = () => {
     getLocation();
 }
 
+// function to fetch 5 days forecast, 
 
+// the function can fetch based on latitude, longitude or on location  
 const fetchForecast = async (userLatitude, userLongitude, location = false) => {
 
     let response = undefined;
@@ -114,22 +121,7 @@ const fetchForecast = async (userLatitude, userLongitude, location = false) => {
     forecastMap(forecast)
 }
 
-
-const showPosition = async (position, location = false) => {
-    if (location) {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${"58eaec513d918c56e6a52478dda1c8e8"}&units=metric`)
-        const data = await response.json();
-        setMainData(data);
-    } else {
-        userLatitude = position.coords.latitude;
-        userLongitude = position.coords.longitude;
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${userLatitude}&lon=${userLongitude}&appid=${"58eaec513d918c56e6a52478dda1c8e8"}&units=metric`)
-        const data = await response.json();
-        setMainData(data);
-        fetchForecast(userLatitude, userLongitude);
-    }
-}
-
+// function to display forecast data 
 const forecastMap = (forecast) => {
     forecast.map((item) => {
         const cardContent = document.createElement("div");
@@ -150,6 +142,23 @@ const forecastMap = (forecast) => {
     })
 }
 
+// show position function to fetch location info  
+const showPosition = async (position, location = false) => {
+    if (location) {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${"58eaec513d918c56e6a52478dda1c8e8"}&units=metric`)
+        const data = await response.json();
+        setMainData(data);
+    } else {
+        userLatitude = position.coords.latitude;
+        userLongitude = position.coords.longitude;
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${userLatitude}&lon=${userLongitude}&appid=${"58eaec513d918c56e6a52478dda1c8e8"}&units=metric`)
+        const data = await response.json();
+        setMainData(data);
+        fetchForecast(userLatitude, userLongitude);
+    }
+}
+
+// functino to display previous location, refresh required 
 const setPrevLocations = () => {
     locations.innerHTML = `<option value=" - 1" selected disabled>Select Location</option>`;
     Array.from(PreviousStoredCities).map((item) => {
@@ -162,6 +171,7 @@ const setPrevLocations = () => {
 
 }
 
+// function for setting the weather data 
 const setMainData = (data) => {
 
     mainCity.textContent = data.name;
@@ -173,6 +183,6 @@ const setMainData = (data) => {
 
 }
 
-
+// function call to get user current location when, it opens the website, location permission is required
 getCurrentUserLocation();
 

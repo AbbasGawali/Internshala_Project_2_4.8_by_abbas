@@ -4,10 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Application - Project 2 by abbas</title>
+
+    <!-- linking output css of tailwind  -->
     <link rel="stylesheet" href="./output.css" />
+    <!-- linking custom css  -->
     <link rel="stylesheet" href="./custom.css" />
   </head>
   <body class="relative">
+    <!-- loader for loading  -->
     <div
       class="loader absolute top-0 left-0 h-[110vh] z-10 text-white text-xl hidden items-center justify-center w-full bg-[#222256]"
     >
@@ -16,6 +20,7 @@
         <p>Loading ...</p>
       </div>
     </div>
+    <!-- web application interface  -->
     <h2 class="text-center text-3xl font-bold py-4 text-[#222256] bg-[#fcc94a]">
       Weather Dashboard
     </h2>
@@ -23,6 +28,7 @@
     <main
       class="maincontainer py-8 flex flex-col lg:flex-row gap-8 px-8 text-white"
     >
+      <!-- search section  -->
       <section class="inputCity lg:w-[30%] xl-w-[30%]">
         <h3 class="font-bold text-xl">Enter a City Name</h3>
         <input
@@ -54,6 +60,7 @@
         </div>
       </section>
 
+      <!-- display section of data -->
       <section class="infoCity lg:w-[60%] xl:w-full">
         <div
           class="currentCity backdrop-blur-sm bg-[#ffffff5c] border border-white w-full flex-col-reverse sm:flex-row flex justify-between p-4 my-4"
@@ -78,6 +85,7 @@
           </div>
         </div>
 
+        <!-- showing forecast of 5 days -->
         <div class="futureForecast">
           <h2 class="text-2xl py-4 font-bold">5-Day Forecast</h2>
           <div
@@ -160,6 +168,7 @@
         </div>
       </section>
     </main>
+    <!-- external js file linking -->
     <script src="./index.js"></script>
   </body>
 </html>
