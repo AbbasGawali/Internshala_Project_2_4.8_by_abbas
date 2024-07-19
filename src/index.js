@@ -145,22 +145,30 @@ const forecastMap = (forecast) => {
 // show position function to fetch location info  
 const showPosition = async (position, location = false) => {
     if (location) {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${"58eaec513d918c56e6a52478dda1c8e8"}&units=metric`)
-        const data = await response.json();
-        setMainData(data);
+        try {
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${"58eaec513d918c56e6a52478dda1c8e8"}&units=metric`)
+            const data = await response.json();
+            setMainData(data);
+        } catch (error) {
+            console.log(error)
+        }
     } else {
         userLatitude = position.coords.latitude;
         userLongitude = position.coords.longitude;
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${userLatitude}&lon=${userLongitude}&appid=${"58eaec513d918c56e6a52478dda1c8e8"}&units=metric`)
-        const data = await response.json();
-        setMainData(data);
-        fetchForecast(userLatitude, userLongitude);
+        try {
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${userLatitude}&lon=${userLongitude}&appid=${"58eaec513d918c56e6a52478dda1c8e8"}&units=metric`)
+            const data = await response.json();
+            setMainData(data);
+            fetchForecast(userLatitude, userLongitude);
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
 // functino to display previous location, refresh required 
 const setPrevLocations = () => {
-    locations.innerHTML = `<option value=" - 1" selected disabled>Select Location</option>`;
+    locations.innerHTML = `<option value="-1" selected disabled>Select Location</option>`;
     Array.from(PreviousStoredCities).map((item) => {
         let node = document.createElement("option");
         node.classList.add("prevLocationSearch")
